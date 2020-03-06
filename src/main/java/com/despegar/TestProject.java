@@ -23,10 +23,10 @@ public class TestProject {
         myAddressBook.printAddressBook();
 
         System.out.println("\nSearch an existing contact:");
-        myAddressBook.searchContact("Nacho").showContact();
+        myAddressBook.searchContact("Nacho").ifPresent( contact -> contact.showContact() );
 
         System.out.println("\nSearch a non-existing contact:");
-        myAddressBook.searchContact("René");
+        myAddressBook.searchContact("René").ifPresent(Contact::showContact);
 
                 System.out.println("\nEdit first contact:");
         contact1.editPhone("5491136985214");

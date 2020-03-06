@@ -1,19 +1,21 @@
 package com.despegar;
 
+import java.util.Objects;
+
 public class Contact {
     private String name;
     private String phone;
     private Address address;
     // Obs: May have multiple addresses or phone numbers. Should upgrade variables to lists.
 
-    Contact (String n, String phn, Address ad) {
-        name = n;
-        phone = phn;
-        address = ad;
+    Contact (String name, String phone, Address address) {
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
     }
 
     public void showContact() {
-        System.out.println(name + ". Phone: " + phone + ". Address: " + address.getAddressString());
+        System.out.println(name + ". Phone: " + phone + ". Address: " + address.toString());
     }
 
     //Retrieve methods:
@@ -28,10 +30,10 @@ public class Contact {
     }
 
     //Edit methods:
-    public void editAddress(Address newAddress) {
+    public void setAddress(Address newAddress) {
         address = newAddress;
     }
-    public void editName(String newName) {
+    public void setName(String newName) {
         name = newName;
     }
     public void editPhone(String newPhone) {

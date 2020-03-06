@@ -2,9 +2,10 @@ package com.despegar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AddressBook {
-    private List<Contact> contactList = new ArrayList();
+    private List<Contact> contactList = new ArrayList<>();
 
     void printAddressBook() {
         for (Contact contact : contactList) {
@@ -12,31 +13,36 @@ public class AddressBook {
         }
     }
 
-    Contact searchContact(String name) {
+    Optional<Contact> searchContact(String name) {
         for(Contact contact : contactList) {
-            if (contact.getName().equals(name)) { return contact; }
+            if (contact.getName().equals(name)) {
+                return Optional.of(contact);
+            }
         }
-        return null;
+        return Optional.empty();
     }
+
     void addContact(Contact newContact) {
-        if (searchContact(newContact.getName()) == null) {
+        if (!searchContact(newContact.getName()).isPresent()) {
             contactList.add(newContact);
         } else {
             System.out.println("Warning: Already existent contact's name. Use editContact() instead.");
         }
     }
+
     void removeContact(Contact contact) {
         boolean removeAction = contactList.remove(contact);
         if (!removeAction) {
             System.out.println("Warning: Tried to remove non-existent contact");
         }
     }
+
     void removeContact(String name) {
-        Contact contactObject = searchContact(name);
-        if (contactObject == null) {
+        Optional<Contact> contactObject = searchContact(name);
+        if (!contactObject.isPresent() ) {
             System.out.println("Warning: Tried to remove non-existent contact");
         } else {
-            removeContact(contactObject);
+            removeContact(contactObject.get());
         }
     }
     void editContact(Contact updatedContact) {
