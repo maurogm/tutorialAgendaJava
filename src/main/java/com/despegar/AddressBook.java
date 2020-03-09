@@ -7,13 +7,13 @@ import java.util.Optional;
 public class AddressBook {
     private List<Contact> contactList = new ArrayList<>();
 
-    void printAddressBook() {
+    public void printAddressBook() {
         for (Contact contact : contactList) {
             contact.showContact();
         }
     }
 
-    Optional<Contact> searchContact(String name) {
+    public Optional<Contact> searchContact(String name) {
         for(Contact contact : contactList) {
             if (contact.getName().equals(name)) {
                 return Optional.of(contact);
@@ -22,7 +22,7 @@ public class AddressBook {
         return Optional.empty();
     }
 
-    void addContact(Contact newContact) {
+    public void addContact(Contact newContact) {
         if (!searchContact(newContact.getName()).isPresent()) {
             contactList.add(newContact);
         } else {
@@ -30,14 +30,14 @@ public class AddressBook {
         }
     }
 
-    void removeContact(Contact contact) {
+    public void removeContact(Contact contact) {
         boolean removeAction = contactList.remove(contact);
         if (!removeAction) {
             System.out.println("Warning: Tried to remove non-existent contact");
         }
     }
 
-    void removeContact(String name) {
+    public void removeContact(String name) {
         Optional<Contact> contactObject = searchContact(name);
         if (!contactObject.isPresent() ) {
             System.out.println("Warning: Tried to remove non-existent contact");
@@ -45,7 +45,7 @@ public class AddressBook {
             removeContact(contactObject.get());
         }
     }
-    void editContact(Contact updatedContact) {
+    public void editContact(Contact updatedContact) {
         removeContact(updatedContact.getName());
         addContact(updatedContact);
     }
