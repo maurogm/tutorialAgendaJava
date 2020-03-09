@@ -3,9 +3,9 @@ package com.despegar;
 import java.util.Objects;
 
 public class Contact {
-    private String name;
-    private String phone;
-    private Address address;
+    private final String name;
+    private final String phone;
+    private final Address address;
     // Obs: May have multiple addresses or phone numbers. Should upgrade variables to lists.
 
     Contact (String name, String phone, Address address) {
@@ -13,31 +13,24 @@ public class Contact {
         this.phone = phone;
         this.address = address;
     }
+    Contact (Contact contact) {
+        this.name = contact.name;
+        this.phone = contact.phone;
+        this.address = contact.address;
+    }
 
     public void showContact() {
         System.out.println(name + ". Phone: " + phone + ". Address: " + address.toString());
     }
 
-    //Retrieve methods:
-    public Address getAddress() {
-        return address;
-    }
+    //Getters:
     public String getName() {
         return name;
     }
     public String getPhone() {
         return phone;
     }
-
-    //Edit methods:
-    public void setAddress(Address newAddress) {
-        address = newAddress;
+    public Address getAddress() {
+        return address;
     }
-    public void setName(String newName) {
-        name = newName;
-    }
-    public void editPhone(String newPhone) {
-        phone = newPhone;
-    }
-
 }

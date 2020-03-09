@@ -28,14 +28,6 @@ public class TestProject {
         System.out.println("\nSearch a non-existing contact:");
         myAddressBook.searchContact("René").ifPresent(Contact::showContact);
 
-                System.out.println("\nEdit first contact:");
-        contact1.editPhone("5491136985214");
-        contact1.showContact();
-        System.out.println("\nPrint adress book again:");
-        myAddressBook.printAddressBook();
-        System.out.println("The edition of the contact outside the list " +
-                "affects the contact inside the list. Is this desirable?");
-
         System.out.println("\nCreate a duplicated contact:");
         Contact contact2Bis = new Contact("Mauro", "15-3232-8165", addMoth);
         contact2Bis.showContact();
