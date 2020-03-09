@@ -2,18 +2,10 @@ package com.despegar;
 
 public class Address {
     private final String country, city, streetName, apartment;
-    private int streetNumber;
+    private final int streetNumber;
     private static String DEFAULT_COUNTRY = "Argentina";
     private static String DEFAULT_CITY = "CABA";
 
-    // Constructors:
-    Address(String a, int n) {
-        streetName = a;
-        streetNumber = n;
-        city = DEFAULT_CITY;
-        country  = DEFAULT_COUNTRY;
-        apartment = "";
-    }
     Address(String st, int n, String ap, String ci, String co) {
         country = co;
         city = ci;
@@ -21,8 +13,16 @@ public class Address {
         apartment = ap;
         streetNumber = n;
     }
+    Address(String a, int n, String ap) {
+        streetName = a;
+        streetNumber = n;
+        apartment = ap;
+        city = DEFAULT_CITY;
+        country = DEFAULT_COUNTRY;
+    }
 
-    @Override
+
+        @Override
     public String toString() {
         String aptForConcat = (apartment.equals("")) ? ", " : " " + apartment + ", ";
         return streetName + " " + streetNumber + aptForConcat + city + ", " + country + ".";
@@ -32,10 +32,20 @@ public class Address {
         System.out.println(this.toString());
     }
 
-    public static void setDefaultCountry(String newCountry) {
-        DEFAULT_COUNTRY = newCountry;
+    //Getters:
+    public String getCountry() {
+        return country;
     }
-    public static void setDefaultCity(String newCity) {
-        DEFAULT_CITY = newCity;
+    public String getCity() {
+        return city;
+    }
+    public String getStreetName() {
+        return streetName;
+    }
+    public String getApartment() {
+        return apartment;
+    }
+    public int getStreetNumber() {
+        return streetNumber;
     }
 }

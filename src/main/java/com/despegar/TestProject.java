@@ -2,7 +2,7 @@ package com.despegar;
 
 public class TestProject {
     public static void main(String[] args) {
-        Address addWork = new Address("Juana Manso", 999);
+        Address addWork = new Address("Juana Manso", 999, "2do piso");
         Address addMoth = new Address("Doblas", 282, "6ºA", "Buenos Aires", "Arg");
 
         System.out.println("A couple of addresses are created:");

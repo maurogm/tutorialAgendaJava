@@ -1,8 +1,6 @@
 package com.despegar;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class AddressBook {
     private List<Contact> contactList = new ArrayList<>();
@@ -49,4 +47,5 @@ public class AddressBook {
         removeContact(updatedContact.getName());
         addContact(updatedContact);
     }
+
 }
