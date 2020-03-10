@@ -3,46 +3,47 @@ package com.despegar;
 import java.util.*;
 
 public class AddressBook {
-    private List<Contact> contactList = new ArrayList<>();
+    private Set<String> contactNames = new TreeSet<>();
+    private SortedMap<String,Contact> contactMap= new TreeMap<>();
 
     public void printAddressBook() {
-        for (Contact contact : contactList) {
-            contact.showContact();
+        for(String contactName : contactNames){
+            contactMap.get(contactName).showContact();
         }
     }
 
-    public Optional<Contact> searchContact(String name) {
-        for(Contact contact : contactList) {
-            if (contact.getName().equals(name)) {
-                return Optional.of(contact);
-            }
+    public Optional<Contact> searchContact(String contactName) {
+        boolean existingContact = contactNames.contains(contactName);
+        if (existingContact) {
+            Contact contact = contactMap.get(contactName);
+            return Optional.of(contact);
+        } else {
+            return Optional.empty();
         }
-        return Optional.empty();
     }
 
     public void addContact(Contact newContact) {
-        if (!searchContact(newContact.getName()).isPresent()) {
-            contactList.add(newContact);
+        boolean addedContact = contactNames.add(newContact.getName());
+        if (addedContact) {
+            contactMap.put(newContact.getName(), newContact);
         } else {
             System.out.println("Warning: Already existent contact's name. Use editContact() instead.");
         }
     }
 
     public void removeContact(Contact contact) {
-        boolean removeAction = contactList.remove(contact);
-        if (!removeAction) {
+        removeContact(contact.getName());
+    }
+
+    public void removeContact(String contactName) {
+        boolean removedContact = contactNames.remove(contactName);
+        if (removedContact) {
+            contactMap.remove(contactName);
+        } else {
             System.out.println("Warning: Tried to remove non-existent contact");
         }
     }
 
-    public void removeContact(String name) {
-        Optional<Contact> contactObject = searchContact(name);
-        if (!contactObject.isPresent() ) {
-            System.out.println("Warning: Tried to remove non-existent contact");
-        } else {
-            removeContact(contactObject.get());
-        }
-    }
     public void editContact(Contact updatedContact) {
         removeContact(updatedContact.getName());
         addContact(updatedContact);
