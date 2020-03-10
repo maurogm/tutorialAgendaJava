@@ -3,7 +3,14 @@ package com.despegar;
 import java.util.*;
 
 public class AddressBook {
-    private SortedMap<String,Contact> contactMap= new TreeMap<>();
+    private SortedMap<String,Contact> contactMap = new TreeMap<>();
+
+    public AddressBook(Contact ... contactArray) {
+        this.contactMap = new TreeMap<>();
+        for (Contact contact : contactArray) {
+            this.contactMap.put(contact.getName(), contact);
+        }
+    }
 
     public void printAddressBook() {
         for(String contactName : contactMap.keySet()){
