@@ -8,12 +8,12 @@ public class Contact {
     private final Address address;
     // Obs: May have multiple addresses or phone numbers. Should upgrade variables to lists.
 
-    Contact (String name, String phone, Address address) {
+    public Contact (String name, String phone, Address address) {
         this.name = name;
         this.phone = phone;
         this.address = address;
     }
-    Contact (Contact contact) {
+    public Contact (Contact contact) {
         this.name = contact.name;
         this.phone = contact.phone;
         this.address = contact.address;

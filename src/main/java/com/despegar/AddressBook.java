@@ -3,50 +3,58 @@ package com.despegar;
 import java.util.*;
 
 public class AddressBook {
-    private Set<String> contactNames = new TreeSet<>();
     private SortedMap<String,Contact> contactMap= new TreeMap<>();
 
     public void printAddressBook() {
-        for(String contactName : contactNames){
+        for(String contactName : contactMap.keySet()){
             contactMap.get(contactName).showContact();
         }
     }
 
+    public int getContactsCount() {
+        return contactMap.size();
+    }
+
     public Optional<Contact> searchContact(String contactName) {
+        return Optional.ofNullable(contactMap.get(contactName));
+        /*
         boolean existingContact = contactNames.contains(contactName);
         if (existingContact) {
             Contact contact = contactMap.get(contactName);
             return Optional.of(contact);
         } else {
             return Optional.empty();
-        }
+        }*/
     }
 
     public void addContact(Contact newContact) {
-        boolean addedContact = contactNames.add(newContact.getName());
-        if (addedContact) {
-            contactMap.put(newContact.getName(), newContact);
-        } else {
-            System.out.println("Warning: Already existent contact's name. Use editContact() instead.");
-        }
+        contactMap.put(newContact.getName(), newContact);
     }
 
     public void removeContact(Contact contact) {
-        removeContact(contact.getName());
+        contactMap.remove(contact.getName());
     }
 
     public void removeContact(String contactName) {
-        boolean removedContact = contactNames.remove(contactName);
-        if (removedContact) {
-            contactMap.remove(contactName);
-        } else {
-            System.out.println("Warning: Tried to remove non-existent contact");
-        }
+        contactMap.remove(contactName);
     }
 
-    public void editContact(Contact updatedContact) {
-        removeContact(updatedContact.getName());
-        addContact(updatedContact);
-    }
+    //public SortedMap<String, List<Contact>> groupContactsByCityManual() {
+    /*public TreeMap<String, ArrayList<Contact>> groupContactsByCityManual() {
+        TreeMap<String, ArrayList<Contact>> contactsByCity = new TreeMap<>();
+        ArrayList<Contact> currentCityContacts = new ArrayList<>();
+        for(String contactName : contactNames){
+            Contact contact = contactMap.get(contactName);
+            Address contactAddress = contact.getAddress();
+            String contactCity = contactAddress.getCity();
+            if (contactsByCity.containsKey(contactCity)) {
+                currentCityContacts = contactsByCity.get(contactCity);
+            }
+            currentCityContacts.add(contact);
+
+            contactsByCity.put(contactCity, currentCityContacts);
+        }
+        return contactsByCity;
+    }*/
 
 }

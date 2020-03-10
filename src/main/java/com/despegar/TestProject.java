@@ -33,11 +33,10 @@ public class TestProject {
         contact2Bis.showContact();
         System.out.println("\nAnd try to add the duplicated contact to the address book:");
         myAddressBook.addContact(contact2Bis);
-        System.out.println("Address book remains unchanged:");
+        System.out.println("The new contact overwrites the previous one:");
         myAddressBook.printAddressBook();
 
-        System.out.println("\nEdit an existing contact:");
-        myAddressBook.editContact(contact2Bis);
-        myAddressBook.printAddressBook();
+        System.out.println("\nManually group contacts by city:");
+        //myAddressBook.groupContactsByCityManual().toString();
     }
 }

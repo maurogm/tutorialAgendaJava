@@ -6,14 +6,14 @@ public class Address {
     private static String DEFAULT_COUNTRY = "Argentina";
     private static String DEFAULT_CITY = "CABA";
 
-    Address(String st, int n, String ap, String ci, String co) {
+    public Address(String st, int n, String ap, String ci, String co) {
         country = co;
         city = ci;
         streetName = st;
         apartment = ap;
         streetNumber = n;
     }
-    Address(String a, int n, String ap) {
+    public Address(String a, int n, String ap) {
         streetName = a;
         streetNumber = n;
         apartment = ap;
@@ -22,7 +22,7 @@ public class Address {
     }
 
 
-        @Override
+    @Override
     public String toString() {
         String aptForConcat = (apartment.equals("")) ? ", " : " " + apartment + ", ";
         return streetName + " " + streetNumber + aptForConcat + city + ", " + country + ".";
