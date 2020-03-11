@@ -11,6 +11,9 @@ public class AddressBook {
             this.contactMap.put(contact.getName(), contact);
         }
     }
+    public AddressBook(AddressBook oldAddressBook) {
+        this.contactMap = new TreeMap<>(oldAddressBook.contactMap);
+    }
 
     public void printAddressBook() {
         for(String contactName : contactMap.keySet()){
