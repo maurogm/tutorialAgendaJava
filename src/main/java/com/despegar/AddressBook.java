@@ -50,21 +50,31 @@ public class AddressBook {
     }
 
     //public SortedMap<String, List<Contact>> groupContactsByCityManual() {
-    /*public TreeMap<String, ArrayList<Contact>> groupContactsByCityManual() {
+    public TreeMap<String, ArrayList<Contact>> groupContactsByCityManual() {
         TreeMap<String, ArrayList<Contact>> contactsByCity = new TreeMap<>();
-        ArrayList<Contact> currentCityContacts = new ArrayList<>();
-        for(String contactName : contactNames){
+        for(String contactName : contactMap.keySet()){
             Contact contact = contactMap.get(contactName);
-            Address contactAddress = contact.getAddress();
-            String contactCity = contactAddress.getCity();
-            if (contactsByCity.containsKey(contactCity)) {
-                currentCityContacts = contactsByCity.get(contactCity);
+            String contactCity = contact.getAddress().getCity();
+            if (!contactsByCity.containsKey(contactCity)) {
+                contactsByCity.put(contactCity, new ArrayList<>());
             }
-            currentCityContacts.add(contact);
-
-            contactsByCity.put(contactCity, currentCityContacts);
+            contactsByCity.get(contactCity).add(contact);
         }
         return contactsByCity;
-    }*/
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AddressBook that = (AddressBook) o;
+
+        return contactMap != null ? contactMap.equals(that.contactMap) : that.contactMap == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return contactMap != null ? contactMap.hashCode() : 0;
+    }
 }
