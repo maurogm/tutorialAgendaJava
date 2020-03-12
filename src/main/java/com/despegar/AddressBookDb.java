@@ -27,13 +27,21 @@ public class AddressBookDb {
         }
     }
 
-
     public int getContactsCount() throws SQLException {
         String sqlQuery = "SELECT COUNT(1) FROM CONTACT";
         PreparedStatement statement = conn.prepareStatement(sqlQuery);
 
         ResultSet resultSet = statement.executeQuery();
         return resultSet.getInt(1);
+    }
+
+    public void addAddressBook(AddressBook addressBook) throws SQLException {
+        AddressBook addressBookCopy = new AddressBook(addressBook);
+        while (addressBookCopy.getContactsCount() > 0) {
+            Contact contact = addressBookCopy.getFirstContact();
+            if (!searchContactByName(contact.getName()).isPresent()) {this.addContact(contact);}
+            addressBookCopy.removeContact(contact);
+        }
     }
 
     public void addContact(Contact contact) throws SQLException {

@@ -24,9 +24,19 @@ public class DbRun {
             System.out.print("After removal: " + db.searchContactByName(name).isPresent());
             System.out.println("; and total contacts = " + db.getContactsCount());
 
+
+            AddressBook testAddressBook = new AddressBook(
+                new Contact("Betty",  "15-12312-123", new Address("Doblas",    282, "6ºA", "Buenos Aires", "Argentina")),
+                new Contact("Carlos", "15-12345-678", new Address("Gaitán",    282, "8vo", "Cartagena",    "Colombia")));
+
+            db.addAddressBook(testAddressBook);
+
+
             System.out.println("The database consists of:");
 
             db.printAddressBook();
+
+
 
 //            String sql = "SELECT * FROM CONTACT WHERE NAME = ?";
 //

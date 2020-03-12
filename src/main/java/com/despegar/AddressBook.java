@@ -25,6 +25,10 @@ public class AddressBook {
         return contactMap.size();
     }
 
+    public Contact getFirstContact() {
+        return contactMap.get(contactMap.firstKey());
+    }
+
     public Optional<Contact> searchContact(String contactName) {
         return Optional.ofNullable(contactMap.get(contactName));
         /*
@@ -41,12 +45,12 @@ public class AddressBook {
         contactMap.put(newContact.getName(), newContact);
     }
 
-    public void removeContact(Contact contact) {
-        contactMap.remove(contact.getName());
+    public Contact removeContact(Contact contact) {
+        return contactMap.remove(contact.getName());
     }
 
-    public void removeContact(String contactName) {
-        contactMap.remove(contactName);
+    public Contact removeContact(String contactName) {
+        return contactMap.remove(contactName);
     }
 
     //public SortedMap<String, List<Contact>> groupContactsByCityManual() {
