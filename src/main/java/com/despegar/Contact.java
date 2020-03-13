@@ -23,6 +23,15 @@ public class Contact {
         System.out.println(name + ". Phone: " + phone + ". Address: " + address.toString());
     }
 
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address=" + address +
+                '}';
+    }
+
     //Getters:
     public String getName() {
         return name;

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Optional;
+import java.util.*;
 
 
 public class AddressBookDb {
@@ -59,6 +59,9 @@ public class AddressBookDb {
         statement.setInt   (6, address.getStreetNumber());
         statement.setString(7, address.getApartment());
 
+        // Remove contact in case it already exists:
+        removeContact(contact.getName());
+
         statement.executeUpdate();
     }
 
@@ -99,4 +102,28 @@ public class AddressBookDb {
 
         return Optional.ofNullable(contact);
     }
+
+    public TreeMap<String, List<Contact>> groupContactsByCity() throws SQLException {
+        TreeMap<String, List<Contact> > contactsByCity = new TreeMap<>();
+
+        String sqlQuery = "" +
+                "SELECT CITY, group_concat(NAME) as name_list\n" +
+                "FROM CONTACT\n" +
+                "GROUP BY CITY";
+        PreparedStatement statement = conn.prepareStatement(sqlQuery);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            String city = resultSet.getString("CITY");
+            String nameList = resultSet.getString("name_list");
+            List<String> nameArray = Arrays.asList(nameList.split(","));
+            List<Contact> contactList = new ArrayList<>();
+            for (String name : nameArray) {
+                contactList.add(searchContactByName(name).get());
+            }
+            contactsByCity.put(city, contactList);
+        }
+        return contactsByCity;
+    }
 }
+
